@@ -19,7 +19,8 @@
     "baseUrl": "./src",
     "paths": {
       "/@/app/*": ["app/*"],
-      "/@/config/*": ["common/config/*"]
+      "/@/config/*": ["common/config/*"],
+      "/@/database/*": ["common/database/*"]
     }
   }
 }
