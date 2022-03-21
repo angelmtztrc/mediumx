@@ -1,8 +1,16 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
+
+import { AppModule } from '/@/app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const config = app.get(ConfigService);
+
+  const port = config.get<number>('port');
+  await app.listen(port, (): void => {
+    Logger.log(`Listening at http://localhost:${port}`, 'Bootstrap');
+  });
 }
 bootstrap();
