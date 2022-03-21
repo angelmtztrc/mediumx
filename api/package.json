@@ -24,8 +24,11 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^2.0.0",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "joi": "^17.6.0",
     "module-alias": "^2.2.2",
     "pg": "^8.7.3",
@@ -60,7 +63,8 @@
   "_moduleAliases": {
     "/@/app": "dist/app",
     "/@/config": "dist/common/config",
-    "/@/database": "dist/common/database"
+    "/@/database": "dist/common/database",
+    "/@/entities": "dist/common/entities"
   },
   "jest": {
     "moduleFileExtensions": [
