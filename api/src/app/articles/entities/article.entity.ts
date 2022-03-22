@@ -10,7 +10,7 @@ export class Article extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   title: string;
 
   @Column({ unique: true })
@@ -19,7 +19,7 @@ export class Article extends BaseEntity {
   @Column({ length: 250 })
   description: string;
 
-  @Column()
+  @Column({ nullable: false })
   content: string;
 
   @ManyToMany(() => Category)
