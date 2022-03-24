@@ -48,7 +48,7 @@ export class UsersService {
   async findOneById(id: number): Promise<User> {
     return await this.repository
       .createQueryBuilder('user')
-      .where('users.id = :id', { id })
+      .where('user.id = :id', { id })
       .andWhere('user.enabled = :enabled', { enabled: true })
       .getOne();
   }

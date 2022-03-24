@@ -22,6 +22,7 @@
       "/@/config/*": ["common/config/*"],
       "/@/database/*": ["common/database/*"],
       "/@/entities/*": ["common/entities/*"],
+      "/@/filters/*": ["common/filters/*"],
       "/@/libs/*": ["common/libs/*"]
     }
   }

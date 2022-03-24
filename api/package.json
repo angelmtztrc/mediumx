@@ -67,6 +67,7 @@
     "/@/config": "dist/common/config",
     "/@/database": "dist/common/database",
     "/@/entities": "dist/common/entities",
+    "/@/filters": "dist/common/filters",
     "/@/libs": "dist/common/libs"
   },
   "jest": {
