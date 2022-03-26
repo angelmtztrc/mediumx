@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseInterceptors
+} from '@nestjs/common';
 
 import { Article } from './entities/article.entity';
 
@@ -8,6 +18,7 @@ import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Controller('articles')
+@UseInterceptors(ClassSerializerInterceptor)
 export class ArticlesController {
   constructor(private readonly service: ArticlesService) {}
 

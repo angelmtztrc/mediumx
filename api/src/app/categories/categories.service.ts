@@ -27,6 +27,13 @@ export class CategoriesService {
     return await this.repository.createQueryBuilder('category').getMany();
   }
 
+  async findAllByIds(ids: number[]): Promise<Category[]> {
+    return await this.repository
+      .createQueryBuilder('category')
+      .where('category.id IN (:...ids)', { ids: ids })
+      .getMany();
+  }
+
   async findOneById(id: number): Promise<Category> {
     return await this.repository
       .createQueryBuilder('category')

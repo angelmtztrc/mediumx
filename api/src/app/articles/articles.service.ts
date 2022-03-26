@@ -1,34 +1,42 @@
 import { Repository } from 'typeorm';
-import { nanoid } from 'nanoid';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { generateSlug } from '/@/libs/generate-slug';
 
 import { Article } from './entities/article.entity';
 
 import { UsersService } from '../users/users.service';
+import { CategoriesService } from '../categories/categories.service';
 
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
-import { generateSlug } from '/@/libs/generate-slug';
 
 @Injectable()
 export class ArticlesService {
   constructor(
     @InjectRepository(Article)
     private readonly repository: Repository<Article>,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly categoriesService: CategoriesService
   ) {}
 
   async create(input: CreateArticleDto, userId: number): Promise<Article> {
-    const { categories, ...rest } = input;
+    const { ...rest } = input;
     const user = await this.usersService.findOneById(userId);
     if (!user) throw new BadRequestException('User not found.');
 
     const slug = generateSlug(input.title);
 
+    let categories = [];
+    if (rest.categories) {
+      categories = await this.categoriesService.findAllByIds(rest.categories);
+    }
+
     const article = this.repository.create({
       ...rest,
       slug,
+      categories,
       author: user
     });
 
@@ -39,6 +47,8 @@ export class ArticlesService {
     return this.repository
       .createQueryBuilder('articles')
       .where('articles.enabled = true')
+      .leftJoinAndSelect('articles.author', 'author')
+      .leftJoinAndSelect('articles.categories', 'categories')
       .getMany();
   }
 
@@ -47,6 +57,8 @@ export class ArticlesService {
       .createQueryBuilder('article')
       .where('article.authorId = :userId', { userId })
       .andWhere('article.enabled = true')
+      .leftJoinAndSelect('articles.author', 'author')
+      .leftJoinAndSelect('articles.categories', 'categories')
       .getMany();
   }
 
@@ -57,11 +69,13 @@ export class ArticlesService {
       .createQueryBuilder('article')
       .where('article.id = :id', { id })
       .andWhere('article.enabled = :enabled', { enabled: true })
+      .leftJoinAndSelect('articles.author', 'author')
+      .leftJoinAndSelect('articles.categories', 'categories')
       .getOne();
   }
 
   async update(id: number, input: UpdateArticleDto): Promise<Article> {
-    const { categories, ...rest } = input;
+    const { ...rest } = input;
 
     const article = await this.findOneById(id);
     if (!article) throw new NotFoundException('Article not found.');
@@ -71,9 +85,15 @@ export class ArticlesService {
       slug = generateSlug(rest.title);
     }
 
+    let categories = [];
+    if (rest.categories) {
+      categories = await this.categoriesService.findAllByIds(rest.categories);
+    }
+
     return await this.repository.save({
       ...article,
       ...rest,
+      categories,
       slug
     });
   }

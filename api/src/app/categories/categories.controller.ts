@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseInterceptors
+} from '@nestjs/common';
 
 import { Category } from './entities/category.entity';
 
@@ -8,6 +18,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
+@UseInterceptors(ClassSerializerInterceptor)
 export class CategoriesController {
   constructor(private readonly service: CategoriesService) {}
 
