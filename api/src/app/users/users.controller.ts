@@ -10,7 +10,7 @@ import { User } from './entities/user.entity';
 
 import { UsersService } from './users.service';
 
-import { CreateUserDto } from './dtos/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)

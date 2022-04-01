@@ -7,5 +7,7 @@ export default Joi.object({
   DATABASE_HOST: Joi.string().default('localhost'),
   DATABASE_NAME: Joi.string().required(),
   DATABASE_USERNAME: Joi.string().required(),
-  DATABASE_PASSWORD: Joi.string().required()
+  DATABASE_PASSWORD: Joi.string().required(),
+  JWT_SECRET: Joi.string().required(),
+  JWT_EXPIRES_IN: Joi.string().required()
 });

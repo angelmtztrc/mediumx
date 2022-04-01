@@ -6,7 +6,7 @@ import { hashPlainText } from '/@/libs/hash-plain-text';
 
 import { User } from './entities/user.entity';
 
-import { CreateUserDto } from './dtos/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
