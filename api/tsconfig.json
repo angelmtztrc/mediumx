@@ -21,8 +21,10 @@
       "/@/app/*": ["app/*"],
       "/@/config/*": ["common/config/*"],
       "/@/database/*": ["common/database/*"],
+      "/@/decorators/*": ["common/decorators/*"],
       "/@/entities/*": ["common/entities/*"],
       "/@/filters/*": ["common/filters/*"],
+      "/@/guards/*": ["common/guards/*"],
       "/@/libs/*": ["common/libs/*"]
     }
   }

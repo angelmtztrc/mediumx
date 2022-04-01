@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateArticleDto {
   @IsString()
@@ -16,8 +16,4 @@ export class CreateArticleDto {
 
   @IsNotEmpty({ each: true })
   categories: number[];
-
-  @IsInt()
-  @IsNotEmpty()
-  userId: number;
 }

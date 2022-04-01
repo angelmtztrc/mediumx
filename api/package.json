@@ -71,8 +71,10 @@
     "/@/app": "dist/app",
     "/@/config": "dist/common/config",
     "/@/database": "dist/common/database",
+    "/@/decorators": "dist/common/decorators",
     "/@/entities": "dist/common/entities",
     "/@/filters": "dist/common/filters",
+    "/@/guards": "dist/common/guards",
     "/@/libs": "dist/common/libs"
   },
   "jest": {

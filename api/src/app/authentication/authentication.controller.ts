@@ -1,5 +1,4 @@
-import { Response } from 'express';
-import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { AuthenticateUserDto } from './dto/authenticate-user.dto';
 
@@ -12,20 +11,13 @@ export class AuthenticationController {
 
   @Post('sign-in')
   @HttpCode(HttpStatus.OK)
-  async authenticate(
-    @Body() payload: AuthenticateUserDto,
-    @Res() res: Response
-  ): Promise<Response> {
-    const data = await this.service.authenticate(payload);
-
-    return res.json({ response: 'success', data });
+  async authenticate(@Body() payload: AuthenticateUserDto): Promise<string> {
+    return this.service.authenticate(payload);
   }
 
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
-  async register(@Body() payload: RegisterUserDto, @Res() res: Response): Promise<Response> {
-    const data = await this.service.register(payload);
-
-    return res.json({ response: 'success', data });
+  async register(@Body() payload: RegisterUserDto): Promise<string> {
+    return this.service.register(payload);
   }
 }
